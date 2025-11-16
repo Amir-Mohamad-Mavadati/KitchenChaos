@@ -1,0 +1,111 @@
+# ==================================================
+# Unity 6.x .gitignore (Recommended)
+# ==================================================
+
+# OS-specific junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ================================================
+# Unity generated folders and files
+# ================================================
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+UserSettings/
+MemoryCaptures/
+Recordings/
+sysinfo.txt
+
+# ================================================
+# IDE / Editor cache
+# ================================================
+.vscode/
+.idea/
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+
+# JetBrains Rider cache
+*.DotSettings.user
+
+# Visual Studio cache
+.vs/
+
+# ================================================
+# Unity Cloud / Collaborate / Plastic SCM
+# ================================================
+collab/
+PlasticSCM/
+PlasticWorkspace/
+
+# ================================================
+# Builds, exports, asset store, etc.
+# ================================================
+*.apk
+*.aab
+*.xcodeproj
+*.xcworkspace
+*.ipa
+*.app
+*.exe
+*.dll
+*.pdb
+*.mdb
+*.mp4
+*.mov
+*.zip
+*.tar.gz
+*.7z
+
+# ================================================
+# Crash reports / Auto backups
+# ================================================
+*.stacktrace
+*.dmp
+*.bak
+*.old
+*.tmp
+
+# ================================================
+# Addressables and shader caches
+# ================================================
+[Aa]sset[Bb]undles/
+[Aa]ddressable[Aa]ssets[Dd]ata/
+ShaderCache/
+ScriptAssemblies/
+
+# ================================================
+# Package Manager
+# ================================================
+Packages/packages-lock.json
+
+# ================================================
+# Local test / profiling data
+# ================================================
+*.profiler
+*.perf
+*.trace
+*.nfo
+
+# ================================================
+# Gradle / Android build files
+# ================================================
+.gradle/
+gradle/
+gradlew
+gradlew.bat
+local.properties

@@ -7,6 +7,9 @@ using UnityEngine.UIElements;
 public class Player : MonoBehaviour, IKitchenObjectParent
 {
     public static Player Instance { get; private set; }
+    public EventHandler OnPlayerPickup;
+    public EventHandler OnPlayerDropItem;
+    public EventHandler OnPlayerWallking;
     public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
 
     public class OnSelectedCounterChangedEventArgs : EventArgs
@@ -15,7 +18,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
     }
 
     [SerializeField] private PlayerInput PlayerInput;
-    private bool IsWalking;
+    public bool IsWalking;
     [SerializeField] private float speed = 6f;
     private Vector3 lastInteractDir;
     private BaseCounter SelectedCounter;
@@ -144,6 +147,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
     public void ClearKitchenObject()
     {
         KitchenObject = null;
+        OnPlayerDropItem?.Invoke(this, EventArgs.Empty);
     }
 
     public KitchenObject GetKitchenObject()
@@ -154,6 +158,11 @@ public class Player : MonoBehaviour, IKitchenObjectParent
     public void SetKitchenObject(KitchenObject KitchenObject)
     {
         this.KitchenObject = KitchenObject;
+
+        if (KitchenObject != null)
+        {
+            OnPlayerPickup?.Invoke(this, EventArgs.Empty);
+        }
     }
 
     public bool HasKitchenObject()

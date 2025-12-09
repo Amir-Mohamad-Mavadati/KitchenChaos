@@ -7,6 +7,8 @@ public class DeliveryManager : MonoBehaviour
 {
     public event EventHandler OnRecipeSpawned;
     public event EventHandler OnRecipeCompleted;
+    public event EventHandler OnRecipeFailed;
+    public event EventHandler OnRecipeSuccess;
     public static DeliveryManager Instance {get; private set;}
    [SerializeField] private RecipeSOList AvailableFood;
    private List<RecipeSO> CustomerOrderList;
@@ -29,7 +31,6 @@ public class DeliveryManager : MonoBehaviour
             {
                 SpawnRecipeTimer = 0f;
                 RecipeSO CustomerOrder = AvailableFood.WithingRecipeSOList[UnityEngine.Random.Range(0, AvailableFood.WithingRecipeSOList.Count)];
-                Debug.Log(CustomerOrder.RecipeName);
                 CustomerOrderList.Add(CustomerOrder);
                 OnRecipeSpawned?.Invoke(this, EventArgs.Empty);
             }
@@ -68,15 +69,15 @@ public class DeliveryManager : MonoBehaviour
                 if (PlateContentMatchsRecipes)
                 {
                     // Player deliver the correct recipe
-                    Debug.Log("Player deliver the correct recipe");
                     CustomerOrderList.RemoveAt(i);
                     OnRecipeCompleted?.Invoke(this, EventArgs.Empty);
+                    OnRecipeSuccess?.Invoke(this, EventArgs.Empty);
                     return;
                 }
             }
         }
         // Player deliver the incorrect recipe
-        Debug.Log("Player deliver the incorrect recipe");
+        OnRecipeFailed?.Invoke(this, EventArgs.Empty);
     }
 
     public List<RecipeSO> GetCustomerOrderList()

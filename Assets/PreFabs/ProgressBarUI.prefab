@@ -87,7 +87,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &7425866050644829206
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,7 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2768cbfd7f7a01c43808ea574fb9b6a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProgressBarUI
-  CuttingCounter: {fileID: 0}
+  HasProgressGameObj: {fileID: 0}
   ProgressBarImage: {fileID: 8332039978904091817}
 --- !u!114 &7131318404787511722
 MonoBehaviour:

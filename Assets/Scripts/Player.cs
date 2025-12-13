@@ -50,6 +50,11 @@ public class Player : MonoBehaviour, IKitchenObjectParent
 
     private void PlayerInput_OnInteractAction(object sender, System.EventArgs e)
     {
+        if (!GameManager.Instance.IsGamePlaying())
+        {
+            return;
+        }
+
         if (SelectedCounter != null)
         {
             SelectedCounter.Interact(this);
@@ -69,7 +74,7 @@ public class Player : MonoBehaviour, IKitchenObjectParent
 
     private void HandleIntraction()
     {
-         Vector2 InputVector = PlayerInput.GetInputVector();
+        Vector2 InputVector = PlayerInput.GetInputVector();
         Vector3 MoveDir = new Vector3(InputVector.x, 0, InputVector.y);
         if (MoveDir != Vector3.zero)
         {

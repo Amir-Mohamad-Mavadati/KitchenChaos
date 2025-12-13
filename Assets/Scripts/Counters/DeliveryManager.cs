@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using UnityEngine.Rendering;
 
 public class DeliveryManager : MonoBehaviour
@@ -15,6 +16,8 @@ public class DeliveryManager : MonoBehaviour
    private float SpawnRecipeTimer;
    private float SpawnRecipeTimerMax = 4f;
    private int SpawnRecipesMax = 4;
+
+   private int RecipeDeliveredAmount;
 
     private void Awake()
     {
@@ -69,6 +72,7 @@ public class DeliveryManager : MonoBehaviour
                 if (PlateContentMatchsRecipes)
                 {
                     // Player deliver the correct recipe
+                    RecipeDeliveredAmount++;
                     CustomerOrderList.RemoveAt(i);
                     OnRecipeCompleted?.Invoke(this, EventArgs.Empty);
                     OnRecipeSuccess?.Invoke(this, EventArgs.Empty);
@@ -83,5 +87,10 @@ public class DeliveryManager : MonoBehaviour
     public List<RecipeSO> GetCustomerOrderList()
     {
         return CustomerOrderList;
+    }
+
+    public int GetRecipeDeliveredAmount()
+    {
+        return RecipeDeliveredAmount;
     }
 }

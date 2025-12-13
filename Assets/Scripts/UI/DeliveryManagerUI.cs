@@ -15,6 +15,15 @@ public class DeliveryManagerUI : MonoBehaviour
     {
         DeliveryManager.Instance.OnRecipeSpawned += DeliveryManager_OnRecipeSpawned;
         DeliveryManager.Instance.OnRecipeCompleted += DeliveryManager_OnRecipeCompleted;
+        GameManager.Instance.OnStateChanged += GameManager_OnStateChanged;
+    }
+
+    private void GameManager_OnStateChanged(object Sender, System.EventArgs e)
+    {
+        if ( GameManager.Instance.IsGameOver())
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     private void DeliveryManager_OnRecipeSpawned(object Sender, System.EventArgs e)

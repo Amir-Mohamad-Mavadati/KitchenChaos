@@ -8,6 +8,11 @@ public class BaseCounter : MonoBehaviour, IKitchenObjectParent
     public static EventHandler OnAnyObjectPlacedHere;
     private KitchenObject KitchenObject;
 
+    public static void ResetStaticData()
+    {
+        OnAnyObjectPlacedHere = null;
+    }
+
     public virtual void Interact(Player Player)
     {
         Debug.LogError("BaseCounter.Interact() was called. This should never happen!");

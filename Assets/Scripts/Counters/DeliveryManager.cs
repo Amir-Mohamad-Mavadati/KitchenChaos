@@ -30,7 +30,7 @@ public class DeliveryManager : MonoBehaviour
         {
             SpawnRecipeTimer += Time.deltaTime;
 
-            if (SpawnRecipeTimer >= SpawnRecipeTimerMax)
+            if (GameManager.Instance.IsGamePlaying() && SpawnRecipeTimer >= SpawnRecipeTimerMax)
             {
                 SpawnRecipeTimer = 0f;
                 RecipeSO CustomerOrder = AvailableFood.WithingRecipeSOList[UnityEngine.Random.Range(0, AvailableFood.WithingRecipeSOList.Count)];

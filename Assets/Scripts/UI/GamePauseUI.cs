@@ -6,6 +6,9 @@ public class GamePauseUI : MonoBehaviour
 {
     [SerializeField] private Button Resume;
     [SerializeField] private Button MainMenu;
+    [SerializeField] private Button OptionSettings;
+    [SerializeField] private Button Controls;
+    [SerializeField] private ControlsUI ClassControlsUI;
     private void Start()
     {
         GameManager.Instance.OnPausedGame += GameManager_OnPausedGame;
@@ -26,7 +29,18 @@ public class GamePauseUI : MonoBehaviour
         {
             Loader.Load(Loader.SceneName.MainMenuScene);
         });
-        
+
+        OptionSettings.onClick.AddListener(() =>
+        {
+            OptionUI.Instance.Show();
+            Hide();
+        });
+        Controls.onClick.AddListener(() =>
+        {
+            Hide();
+            ClassControlsUI.Show();
+            
+        });
     }
 
     private void GameManager_OnPausedGame(object Sender, System.EventArgs e)
@@ -39,7 +53,7 @@ public class GamePauseUI : MonoBehaviour
         Hide();
     }
 
-    private void Show()
+    public void Show()
     {
         gameObject.SetActive(true);
     }

@@ -5,10 +5,14 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; private set;}
     [SerializeField] private SoundEffectSO SoundRefSO;
+    private const string PLAYER_PREF_SOUND_EFFECT_VOLUME = "SoundEffect";
+
+    private float SoundEffectVolume = 1f;
 
     private void Awake()
     {
         Instance = this;
+        SoundEffectVolume = PlayerPrefs.GetFloat(PLAYER_PREF_SOUND_EFFECT_VOLUME, .3f);
     }
     void Start()
     {
@@ -60,7 +64,7 @@ public class SoundManager : MonoBehaviour
 
     private void PlaySound(AudioClip[] AudioArray, Vector3 Position, float Volume = 1f)
     {
-        AudioSource.PlayClipAtPoint(AudioArray[Random.Range(0, AudioArray.Length)], Position, Volume);
+        AudioSource.PlayClipAtPoint(AudioArray[Random.Range(0, AudioArray.Length)], Position, Volume * SoundEffectVolume);
     }
     private void PlaySound(AudioClip Audio, Vector3 Position, float Volume = 1f)
     {
@@ -69,7 +73,23 @@ public class SoundManager : MonoBehaviour
 
     public void PlayFootStep(Vector3 Position, float Volume = 1f)
     {
-        PlaySound(SoundRefSO.FootSteps, Position, Volume);
+        PlaySound(SoundRefSO.FootSteps, Position, Volume * SoundEffectVolume);
+    }
+
+    public void ChangeSoundEffectsVolume()
+    {
+        SoundEffectVolume += .1f;
+        if (SoundEffectVolume > 1f)
+        {
+            SoundEffectVolume = 0;
+        }
+        PlayerPrefs.SetFloat(PLAYER_PREF_SOUND_EFFECT_VOLUME, SoundEffectVolume);
+        PlayerPrefs.Save();
+    }
+
+    public float GetSoundEffectVolume()
+    {
+        return SoundEffectVolume;
     }
     
 }

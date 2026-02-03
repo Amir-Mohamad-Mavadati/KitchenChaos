@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,7 +18,6 @@ public class GameManager : MonoBehaviour
     }
 
     private State GameState;
-    private float WaitingTimer = 1f;
     private float CountDownTimer = 3f;
     private float GamePlayingTimer;
     private float GamePlayingTimerMax = 30f;
@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         PlayerInput.Instance.OnTogglePausedGame += PlayerInput_OnTogglePausedGame;
+        PlayerInput.Instance.OnInteractAction += PlayerInput_OnInteractAction;
     }
 
     private void Awake()
@@ -39,12 +40,6 @@ public class GameManager : MonoBehaviour
         switch (GameState)
         {
             case State.WaitingToStart:
-                WaitingTimer -= Time.deltaTime;
-                if(WaitingTimer < 0f)
-                {
-                   GameState =  State.CountDownToStart;
-                   OnStateChanged?.Invoke(this, EventArgs.Empty);
-                }
                 break;
             
             case State.CountDownToStart:
@@ -85,6 +80,15 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 1f;
             OnUnPausedGame?.Invoke(this, EventArgs.Empty);
         }
+    }
+
+    private void PlayerInput_OnInteractAction(object Sender, System.EventArgs e)
+    {
+        if(GameState == State.WaitingToStart)
+        {
+            GameState = State.CountDownToStart;
+        }
+        OnStateChanged?.Invoke(this, EventArgs.Empty);
     }
 
     public bool IsGamePlaying()
